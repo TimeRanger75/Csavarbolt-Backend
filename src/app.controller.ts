@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Render } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { AppService } from './app.service';
+import { Csavar } from './csavarbolt.entity';
 
 @Controller()
 export class AppController {
@@ -9,9 +10,9 @@ export class AppController {
     private dataSource: DataSource,
   ) {}
 
-  @Get()
-  @Render('index')
-  index() {
-    return { message: 'Welcome to the homepage' };
+  @Get('/csavar')
+  listCsavarok(){
+    const csavarRepo=this.dataSource.getRepository(Csavar)
+    return csavarRepo.find();
   }
 }
