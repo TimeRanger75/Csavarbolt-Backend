@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Render } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Render } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { AppService } from './app.service';
 import { Csavar } from './csavarbolt.entity';
@@ -19,9 +19,14 @@ export class AppController {
   @Post('/csavar')
   insertCsaver(@Body()csavar:Csavar){
     csavar.id=undefined;
-    const csavarRepo=this.dataSource.getTreeRepository(Csavar);
+    const csavarRepo=this.dataSource.getRepository(Csavar);
     csavarRepo.save(csavar);
   }
 
+  @Delete('/csavar/:id')
+  deleteCsaver(@Param('id')id:number){
+    const csavarRepo=this.dataSource.getRepository(Csavar);
+    csavarRepo.delete(id);
+  }
 
 }
