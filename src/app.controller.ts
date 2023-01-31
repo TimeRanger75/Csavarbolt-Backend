@@ -15,4 +15,13 @@ export class AppController {
     const csavarRepo=this.dataSource.getRepository(Csavar)
     return csavarRepo.find();
   }
+
+  @Post('/csavar')
+  insertCsaver(@Body()csavar:Csavar){
+    csavar.id=undefined;
+    const csavarRepo=this.dataSource.getTreeRepository(Csavar);
+    csavarRepo.save(csavar);
+  }
+
+
 }
