@@ -27,7 +27,7 @@ export class Rendeles{
     id:number;
     
     @ManyToOne(()=> Csavar, (csavar)=> csavar.rendelesek)
-    csavar:Csavar;
+    csavar:number;
 
     @Column('int')
     db:number;
